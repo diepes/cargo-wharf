@@ -131,7 +131,7 @@ fn get_dependencies_metadata<'a>(
             .context("Unable to open dependency build script output")?;
 
         if let Some(ref name) = output.link_name {
-            let name = envify(&name);
+            let name = envify(name);
 
             for (key, value) in output.metadata {
                 metadata.insert(format!("DEP_{}_{}", name, envify(&key)), value);

@@ -24,7 +24,7 @@ pub fn merge_buildscript_nodes(graph: &mut StableGraph<Node, ()>) {
                 };
 
                 let run_index = index;
-                while let Some(compile_index) = compile_indexes.next_node(&graph) {
+                while let Some(compile_index) = compile_indexes.next_node(graph) {
                     let compile_node = graph[compile_index].clone();
 
                     match graph[run_index].add_buildscript_compile_node(compile_node) {
@@ -84,7 +84,7 @@ pub fn apply_buildscript_outputs(graph: &mut StableGraph<Node, ()>) {
                         .detach()
                 };
 
-                while let Some(dependent) = dependenents.next_node(&graph) {
+                while let Some(dependent) = dependenents.next_node(graph) {
                     match graph[dependent].kind() {
                         NodeKind::MergedBuildScript { .. } => {}
 
@@ -106,7 +106,7 @@ fn move_edges(graph: &mut StableGraph<Node, ()>, from: NodeIndex<u32>, to: NodeI
 
     let mut dependencies = graph.neighbors_directed(from, Direction::Incoming).detach();
 
-    while let Some(dependency) = dependencies.next_node(&graph) {
+    while let Some(dependency) = dependencies.next_node(graph) {
         graph.add_edge(dependency, to, ());
     }
 }

@@ -25,7 +25,7 @@ pub trait SerializationQuery: WharfDatabase + SourceQuery + PrettyPrintQuery {
             self.maybe_cache_dependencies(&nodes, &mut deps, index);
 
             let (node_llb, output) = self.serialize_node(
-                &self.config(),
+                self.config(),
                 self.builder_source().clone().unwrap(),
                 deps[index.index()].as_ref().unwrap(),
                 self.graph().node_weight(index).unwrap(),

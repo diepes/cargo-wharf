@@ -51,7 +51,7 @@ impl From<RawBuildPlan> for StableGraph<Node, ()> {
 
             deps.sort();
             for dep in item.deps.iter() {
-                graph.add_edge(nodes[*dep as usize], nodes[index], ());
+                graph.add_edge(nodes[*dep], nodes[index], ());
             }
         }
 
