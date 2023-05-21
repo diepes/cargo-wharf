@@ -56,7 +56,7 @@ impl BuildScriptOutput {
                 .context("Unable to open output JSON file for reading")?,
         );
 
-        Ok(serde_json::from_reader(reader).context("Unable to deserialize the build output")?)
+        serde_json::from_reader(reader).context("Unable to deserialize the build output")
     }
 }
 

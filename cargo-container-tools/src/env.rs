@@ -17,7 +17,7 @@ impl RuntimeEnv {
     pub fn output_dir() -> CargoResult<&'static Path> {
         OUT_DIR
             .as_ref()
-            .map(|value| Path::new(value))
+            .map(Path::new)
             .ok_or_else(|| Error::msg("unable to find OUT_DIR env variable"))
     }
 
