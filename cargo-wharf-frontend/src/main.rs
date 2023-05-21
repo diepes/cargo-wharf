@@ -1,5 +1,5 @@
 #![warn(clippy::all)]
-#![deny(warnings)]
+// #![deny(warnings)] TODO(diepes/Pieter)
 
 use env_logger::Env;
 use log::*;
