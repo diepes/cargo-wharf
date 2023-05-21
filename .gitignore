@@ -1,3 +1,6 @@
 target
 debug-output
 tests/integration/.cache
+
+# Snyk security scanner
+.dccache

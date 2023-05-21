@@ -1,3 +1,6 @@
+# denzp -> diepes
+# checkout@v1 -> v3
+# peter-evans/dockerhub-description@v2.1.0 -> @v3.4.1 &param
 name: Docker Hub description
 on:
   push:
@@ -11,27 +14,29 @@ jobs:
     if: github.ref == 'refs/tags/cargo-wharf-frontend-latest'
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: Frontend description
-        uses: peter-evans/dockerhub-description@v2.1.0
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKERHUB_REPOSITORY: denzp/cargo-wharf-frontend
-          README_FILEPATH: cargo-wharf-frontend/README.md
+        uses: peter-evans/dockerhub-description@v3.4.1
+        #uses: peter-evans/dockerhub-description@v2.1.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: diepes/cargo-wharf-frontend
+          readme-filepath: cargo-wharf-frontend/README.md
 
   tools-description:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/tags/cargo-container-tools-latest'
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: Container Tools description
-        uses: peter-evans/dockerhub-description@v2.1.0
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKERHUB_REPOSITORY: denzp/cargo-container-tools
-          README_FILEPATH: cargo-container-tools/README.md
+        #uses: peter-evans/dockerhub-description@v2.1.0
+        uses: peter-evans/dockerhub-description@v3.4.1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: diepes/cargo-container-tools
+          readme-filepath: cargo-container-tools/README.md

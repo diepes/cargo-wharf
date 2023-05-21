@@ -1,3 +1,5 @@
+# denzp -> diepes
+# checkout@v1 -> v3
 name: Publish the cargo-wharf-frontend
 on:
   push:
@@ -6,11 +8,11 @@ on:
 
 jobs:
   publish-requested-tag:
-    name: Publish denzp/cargo-wharf-frontend
+    name: Publish diepes/cargo-wharf-frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: Print docker info
         run: docker info
@@ -21,8 +23,8 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Installing buildx
-        run: .ci/install-buildx.sh
+      #- name: Installing buildx
+      #  run: .ci/install-buildx.sh
 
       - name: Build and push the image
         env:
@@ -30,4 +32,4 @@ jobs:
         run: >-
           docker buildx build
           --push -f cargo-wharf-frontend/Cargo.toml .
-          --tag denzp/cargo-wharf-frontend:${TAG#"refs/tags/cargo-wharf-frontend-"}
+          --tag diepes/cargo-wharf-frontend:${TAG#"refs/tags/cargo-wharf-frontend-"}

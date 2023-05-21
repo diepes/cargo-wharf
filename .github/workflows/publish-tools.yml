@@ -1,3 +1,5 @@
+# denzp -> diepes
+# checkout@v1 -> v3
 name: Publish the cargo-container-tools
 on:
   push:
@@ -6,11 +8,11 @@ on:
 
 jobs:
   publish-requested-tag:
-    name: Publish denzp/cargo-container-tools
+    name: Publish diepes/cargo-container-tools
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: Print docker info
         run: docker info
@@ -21,8 +23,8 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Installing buildx
-        run: .ci/install-buildx.sh
+      #- name: Installing buildx
+      #  run: .ci/install-buildx.sh
 
       - name: Build and push the image
         env:
@@ -30,5 +32,5 @@ jobs:
         run: >-
           docker buildx build
           --push -f cargo-container-tools/Cargo.toml .
-          --tag denzp/cargo-container-tools:${TAG#"refs/tags/cargo-container-tools-"}
-          --cache-from type=registry,ref=denzp/cargo-container-tools:cache
+          --tag diepes/cargo-container-tools:${TAG#"refs/tags/cargo-container-tools-"}
+          --cache-from type=registry,ref=diepes/cargo-container-tools:cache
